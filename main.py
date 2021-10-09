@@ -2,9 +2,8 @@
 
 import pygame as pg
 
-from board import Board
+from game import Game
 from constants import FPS, HEIGHT, WHITE, WIDTH
-from endgame import draw_endscreen
 
 pg.init()
 
@@ -13,12 +12,10 @@ pg.display.set_caption("Jeu de dames")
 
 clock = pg.time.Clock()  # Horloge pour représenter les fps
 
-b = Board(WIN)
+g = Game(WIN)
 
 def draw():
-    WIN.fill(WHITE)
-    b.draw()
-    #draw_endscreen(WIN)
+    g.draw()
     pg.display.update()
 
 
@@ -31,6 +28,10 @@ def main():
             if event.type == pg.QUIT:
                 pg.quit()
                 return 0
+
+            if event.type == pg.MOUSEBUTTONDOWN:
+                g.onclick(pg.mouse.get_pos())
+
 
 
 if __name__ == "__main__":

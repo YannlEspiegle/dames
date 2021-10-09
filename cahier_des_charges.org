@@ -2,10 +2,10 @@
 
 * Jeu de dames
 ** Jeu à deux joueurs
-** [2/3] Interface graphique
+** [3/3] Interface graphique
 - [X] Plateau
 - [X] Pièces
-- [-] Ecran de fin
+- [X] Ecran de fin : fichier [[file:endscreen.py][endscreen.py]]
 ** TODO Promotion en dames
 ** [0/5] Déplacements
 - [ ] diagonales
@@ -26,7 +26,6 @@
 - 10 : dame blanche
 - 20 : dame noire
 ** Attributs
-- tour_joueur : {1, 2}   Le trait du joueur (1 = blanc, 2 = noir)
 - tableau : list[int]
 ** [1/2] Méthodes
 - [X] draw()
