@@ -26,7 +26,33 @@
 - 10 : dame blanche
 - 20 : dame noire
 ** Attributs
-- tableau : list[int]
+*** ~tableau~
+- liste 2d d'entier, se référer à [[Codes pièces]]
+- représenter le damier
+*** ~piece_est_touchee~
+- Booléens
+- Vérifie si une pièce est selectionnée
+*** ~piece_touchee~
+- tuple (int: x, int: y)
+- Les coordonnées de la pièce selectionnée
+** [5/6] Méthodes
+- [X] ~draw()~
+- [X] ~deplacer()~
+- [X] ~enlever()~
+- [X] ~select()~
+- [X] ~deselect()~
+- [ ] ~coups_possibles_pour()~
+* Classe Game
+** Attributs
+- board
+- trait
+- coups_sans_prise
+- partie_finie
+- piece_touchee
 ** [1/2] Méthodes
-- [X] draw()
-- [ ] on_click(pos)
+*** [X] draw()
+dessine le plateau et les pions sur l'écran, si la partie est finie, il dessine
+l'écran de fin de partie
+*** [ ] on_click()
+- Si une pièce est sélectionnée : Si la case cliquée est un coup légal : déplacer la pièce vers la case
+- Sinon, déselectionner la pièce

@@ -21,7 +21,6 @@ def draw():
 
 def main():
     while True:
-        clock.tick(FPS)
         draw()
 
         for event in pg.event.get():
@@ -30,8 +29,12 @@ def main():
                 return 0
 
             if event.type == pg.MOUSEBUTTONDOWN:
-                g.onclick(pg.mouse.get_pos())
+                print("a")
+                p = pg.mouse.get_pos()
+                print("b")
+                g.onclick(p)
 
+        clock.tick(FPS)
 
 
 if __name__ == "__main__":
