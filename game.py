@@ -18,14 +18,23 @@ class Game:
     def draw(self):
         self.board.draw()
 
+    def tour_suivant(self):
+        if self.trait == 1:
+            self.trait = 2
+        else:
+            self.trait = 1
+
     def onclick(self, pos):
         if not self.partie_finie:
             # on récupère les coordonnées de la pièce sur le plateau
             case = (pos[0] // TAILLE_CASE, pos[1] // TAILLE_CASE)
 
             if not self.board.piece_est_touchee:
-                self.board.select(case)
+                if self.board.get_color(case) == self.trait:
+                    self.board.select(case)
             else:
                 # si une piece est déja selectionnée, on la déplace
-                self.board.deplacer(self.board.piece_touchee, case)
+                est_legal = self.board.deplacer(self.board.piece_touchee, case)
                 self.board.deselect()
+                if est_legal:
+                    self.tour_suivant()

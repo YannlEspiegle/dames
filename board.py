@@ -4,6 +4,7 @@
 import pygame as pg
 
 from constants import BLACK, TAILLE_CASE, WHITE
+from piece import Piece
 from pictures import PIECES
 
 
@@ -26,12 +27,18 @@ class Board:
         self.piece_touchee = (10, 10)
 
     def deplacer(self, depart, arrivee):
-        """Déplace une pièce d'une case à une autre sans se soucier de l'arrivée"""
-        x1, y1 = depart
-        x2, y2 = arrivee
+        """
+        Si le coup est légal : déplace la pièce et renvoie True
+        Sinon : renvoie False
+        """
+        x, y = depart
+        couleur = self.plateau[y][x] % 10
+        piece = Piece(depart, couleur)
 
-        self.plateau[y2][x2] = self.plateau[y1][x1]
-        self.plateau[y1][x1] = 0
+        if arrivee in piece.coups_possibles(self.plateau):
+            piece.deplacer(self.plateau, arrivee)
+            return True
+        return False
 
     def select(self, pos):
         x, y = pos
@@ -44,12 +51,16 @@ class Board:
             self.deselect()
 
     def deselect(self):
-            self.piece_est_touchee = False
-            self.piece_touchee = (10, 10)
+        self.piece_est_touchee = False
+        self.piece_touchee = (10, 10)
 
     def enlever(self, pos):
         x, y = pos
         self.plateau[y][x] = 0
+
+    def get_color(self, case):
+        x, y = case
+        return self.plateau[y][x] % 10
 
     def draw(self):
         taille = TAILLE_CASE

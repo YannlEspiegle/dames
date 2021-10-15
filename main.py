@@ -14,6 +14,7 @@ clock = pg.time.Clock()  # Horloge pour représenter les fps
 
 g = Game(WIN)
 
+
 def draw():
     g.draw()
     pg.display.update()
@@ -29,9 +30,7 @@ def main():
                 return 0
 
             if event.type == pg.MOUSEBUTTONDOWN:
-                print("a")
                 p = pg.mouse.get_pos()
-                print("b")
                 g.onclick(p)
 
         clock.tick(FPS)
