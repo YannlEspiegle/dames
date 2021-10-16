@@ -24,37 +24,58 @@ class Board:
             [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
         ]
         self.piece_est_touchee = False
-        self.piece_touchee = (10, 10)
+        self.piece_touchee = None
+        # piece_touchee sera un objet Piece
 
-    def deplacer(self, depart, arrivee):
+    def deplacer(self, arrivee):
         """
+        Déplace la `piece_touchee` au point d'arrivée
         Si le coup est légal : déplace la pièce et renvoie True
         Sinon : renvoie False
         """
-        x, y = depart
-        couleur = self.plateau[y][x] % 10
-        piece = Piece(depart, couleur)
+        if arrivee in self.piece_touchee.coups_possibles(self.plateau):
 
-        if arrivee in piece.coups_possibles(self.plateau):
-            piece.deplacer(self.plateau, arrivee)
+            if self.piece_touchee.prises_possibles(self.plateau) != []:
+                # la pièce adverse est le milieu entre l'arrivee et le départ
+                piece_adverse = (
+                    (self.piece_touchee.x + arrivee[0]) // 2,
+                    (self.piece_touchee.y + arrivee[1]) // 2,
+                )
+                self.enlever(piece_adverse)
+
+            self.piece_touchee.deplacer(self.plateau, arrivee)
             return True
         return False
+
+    def pieces_pouvant_prendre(self, couleur):
+        """vérifie si une couleur peut faire une prise car elle prendre obligatoirement
+        renvoie les coord des pièces qui peuvent prendre"""
+        res = []
+        for y in range(10):
+            for x in range(10):
+                if self.plateau[y][x] == couleur:
+                    piece = Piece((x, y), couleur)
+                    if piece.prises_possibles(self.plateau) != []:
+                        res.append((x, y))
+        return res
 
     def select(self, pos):
         x, y = pos
         if self.plateau[y][x]:
             # si on clique sur une piece
             self.piece_est_touchee = True
-            self.piece_touchee = (x, y)
+            couleur = self.get_color(pos)
+            self.piece_touchee = Piece(pos, couleur)
         else:
             # si on clique sur une case vide
             self.deselect()
 
     def deselect(self):
         self.piece_est_touchee = False
-        self.piece_touchee = (10, 10)
+        self.piece_touchee = None
 
     def enlever(self, pos):
+        """retire une pièce du plateau"""
         x, y = pos
         self.plateau[y][x] = 0
 

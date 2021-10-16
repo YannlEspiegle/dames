@@ -31,10 +31,12 @@ class Game:
 
             if not self.board.piece_est_touchee:
                 if self.board.get_color(case) == self.trait:
-                    self.board.select(case)
+                    pieces_obligatoires = self.board.pieces_pouvant_prendre(self.trait)
+                    if pieces_obligatoires == [] or case in pieces_obligatoires:
+                        self.board.select(case)
             else:
                 # si une piece est déja selectionnée, on la déplace
-                est_legal = self.board.deplacer(self.board.piece_touchee, case)
+                est_legal = self.board.deplacer(case)
                 self.board.deselect()
                 if est_legal:
                     self.tour_suivant()

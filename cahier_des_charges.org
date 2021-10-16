@@ -6,9 +6,9 @@
 - [X] Plateau
 - [X] Pièces
 - [X] Ecran de fin : fichier [[file:endscreen.py][endscreen.py]]
-** [1/6] Déplacements
+** [2/6] Déplacements
 - [X] diagonales
-- [ ] obligation de prise
+- [X] obligation de prise
 - [ ] La rafle des pions
 - [ ] La rafle des dames
 - [ ] les dames peuvent prendre en arrière et aussi loin que possible
