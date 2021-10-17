@@ -6,12 +6,12 @@
 - [X] Plateau
 - [X] Pièces
 - [X] Ecran de fin : fichier [[file:endscreen.py][endscreen.py]]
-** [4/6] Déplacements
+** [5/6] Déplacements
 - [X] diagonales
 - [X] obligation de prise
 - [X] Promotion en dames
 - [X] mouvement des dames
-- [ ] prises des dames
+- [X] prises des dames
 - [ ] La rafle
 ** [0/4] Fins de parties
 - [ ] Si 25 coups sans prises, partie nulle

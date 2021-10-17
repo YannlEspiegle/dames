@@ -36,12 +36,10 @@ class Board:
         if arrivee in self.piece_touchee.coups_possibles(self.plateau):
 
             if self.piece_touchee.prises_possibles(self.plateau) != []:
-                # la pièce adverse est le milieu entre l'arrivee et le départ
-                piece_adverse = (
-                    (self.piece_touchee.x + arrivee[0]) // 2,
-                    (self.piece_touchee.y + arrivee[1]) // 2,
-                )
-                self.enlever(piece_adverse)
+                # prises_possibles renvoie la case d'arrivée puis la case de l'adversaire à supprimer
+                for arr, piece_adverse in self.piece_touchee.prises_possibles(self.plateau):
+                    if arr == arrivee:
+                        self.enlever(piece_adverse)
 
             self.piece_touchee.deplacer(self.plateau, arrivee)
 
@@ -61,22 +59,18 @@ class Board:
         for y in range(10):
             for x in range(10):
                 if self.get_color((x, y)) == couleur:
-                    piece = Piece((x, y), couleur)
+                    piece = self.piece_from((x, y))
                     if piece.prises_possibles(self.plateau) != []:
                         res.append((x, y))
         return res
 
     def select(self, pos):
+        """Selectionne la pièce située sur `pos`"""
         x, y = pos
         if self.plateau[y][x]:
             # si on clique sur une piece
             self.piece_est_touchee = True
-            couleur = self.get_color(pos)
-            self.piece_touchee = Piece(pos, couleur)
-
-            if self.plateau[y][x] == couleur * 10:
-                self.piece_touchee.est_dame = True
-
+            self.piece_touchee = self.piece_from(pos)
         else:
             # si on clique sur une case vide
             self.deselect()
@@ -90,13 +84,22 @@ class Board:
         x, y = pos
         self.plateau[y][x] = 0
 
-    def get_color(self, case):
-        x, y = case
+    def get_color(self, pos):
+        """Renvoie la couleur de la pièce située sur `pos` (1=blanc, 2=noir)"""
+        x, y = pos
         if self.plateau[y][x] < 10:
             return self.plateau[y][x]
         return self.plateau[y][x] // 10
 
+    def piece_from(self, pos):
+        """Renvoie un objet Piece correspondant à la pièce située sur `pos`"""
+        x, y = pos
+        couleur = self.get_color(pos)
+        est_dame = (self.plateau[y][x] == couleur * 10)
+        return Piece(pos, couleur, est_dame)
+
     def draw(self):
+        """dessine le plateau et les pièces sur l'écran"""
         taille = TAILLE_CASE
         for y in range(10):
             for x in range(10):
