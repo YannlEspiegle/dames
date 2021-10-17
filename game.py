@@ -16,7 +16,10 @@ class Game:
         self.winner = 0
 
     def draw(self):
-        self.board.draw()
+        if not self.partie_finie:
+            self.board.draw()
+        else:
+            draw_endscreen(self.win, self.winner)
 
     def tour_suivant(self):
         if self.trait == 1:
@@ -26,7 +29,7 @@ class Game:
 
     def onclick(self, pos):
         if not self.partie_finie:
-            # on récupère les coordonnées de la pièce sur le plateau
+            # on récupère les coordonnées de la case sur le plateau
             case = (pos[0] // TAILLE_CASE, pos[1] // TAILLE_CASE)
 
             if not self.board.piece_est_touchee:

@@ -2,8 +2,8 @@
 
 import pygame as pg
 
-from game import Game
 from constants import FPS, HEIGHT, WHITE, WIDTH
+from game import Game
 
 pg.init()
 
@@ -30,8 +30,8 @@ def main():
                 return 0
 
             if event.type == pg.MOUSEBUTTONDOWN:
-                p = pg.mouse.get_pos()
-                g.onclick(p)
+                position = pg.mouse.get_pos()
+                g.onclick(position)
 
         clock.tick(FPS)
 

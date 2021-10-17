@@ -4,8 +4,8 @@
 import pygame as pg
 
 from constants import BLACK, TAILLE_CASE, WHITE
-from piece import Piece
 from pictures import PIECES
+from piece import Piece
 
 
 class Board:
@@ -44,16 +44,23 @@ class Board:
                 self.enlever(piece_adverse)
 
             self.piece_touchee.deplacer(self.plateau, arrivee)
+
+            # promotions en dames
+            if self.piece_touchee.couleur == 1 and arrivee[1] == 0:
+                self.piece_touchee.promotion(self.plateau)
+            elif self.piece_touchee.couleur == 2 and arrivee[1] == 9:
+                self.piece_touchee.promotion(self.plateau)
+
             return True
         return False
 
     def pieces_pouvant_prendre(self, couleur):
-        """vérifie si une couleur peut faire une prise car elle prendre obligatoirement
-        renvoie les coord des pièces qui peuvent prendre"""
+        """vérifie si une couleur peut faire une prise car elle doit prendre obligatoirement
+        renvoie les coordonnées des pièces pouvant prendre"""
         res = []
         for y in range(10):
             for x in range(10):
-                if self.plateau[y][x] == couleur:
+                if self.get_color((x, y)) == couleur:
                     piece = Piece((x, y), couleur)
                     if piece.prises_possibles(self.plateau) != []:
                         res.append((x, y))
@@ -66,6 +73,10 @@ class Board:
             self.piece_est_touchee = True
             couleur = self.get_color(pos)
             self.piece_touchee = Piece(pos, couleur)
+
+            if self.plateau[y][x] == couleur * 10:
+                self.piece_touchee.est_dame = True
+
         else:
             # si on clique sur une case vide
             self.deselect()
@@ -81,7 +92,9 @@ class Board:
 
     def get_color(self, case):
         x, y = case
-        return self.plateau[y][x] % 10
+        if self.plateau[y][x] < 10:
+            return self.plateau[y][x]
+        return self.plateau[y][x] // 10
 
     def draw(self):
         taille = TAILLE_CASE
@@ -97,6 +110,6 @@ class Board:
 
                 # Dessiner les pièces
                 if self.plateau[y][x]:
-                    piece = PIECES[self.plateau[y][x]]
+                    piece = PIECES[self.plateau[y][x]]  # `piece` est une image
                     piece = pg.transform.scale(piece, (taille, taille))
                     self.win.blit(piece, (x * taille, y * taille))
