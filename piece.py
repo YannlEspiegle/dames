@@ -107,7 +107,8 @@ class Piece:
 
     def promotion(self, plateau):
         self.est_dame = True
-        plateau[self.y][self.x] *= 10
+        if not self.est_dame:
+            plateau[self.y][self.x] *= 10
 
     def diagonale(self, x, y, direction, l):
         """renvoie la case de direction {0, 1, 2, 3} (la vrai direction n'importe pas) et de longueur l"""
