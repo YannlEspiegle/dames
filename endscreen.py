@@ -2,13 +2,14 @@
 
 import pygame as pg
 
-from constants import HEIGHT, TRUE_BLACK, WHITE, WIDTH
-
-titre_blanc = pg.image.load("assets/titre.png")
-texte_blanc = pg.image.load("assets/victoire_noir.png")
-
-titre_noir = pg.image.load("assets/titre_noir.png")
-texte_noir = pg.image.load("assets/victoire_blanc.png")
+from constants import GREY, HEIGHT, TRUE_BLACK, WHITE, WIDTH
+from pictures import (
+    TEXTE_EGALITE,
+    TEXTE_VICTOIRE_BLANCS,
+    TEXTE_VICTOIRE_NOIRS,
+    TITRE_COULEUR_BLANC,
+    TITRE_COULEUR_NOIR,
+)
 
 
 def draw_endscreen(win, winner):
@@ -18,15 +19,21 @@ def draw_endscreen(win, winner):
 
     if winner == 1:
         # blancs gagnent -> fond blanc, écriture noire
-        titre = titre_noir
-        texte = texte_noir
+        titre = TITRE_COULEUR_NOIR
+        texte = TEXTE_VICTOIRE_BLANCS
         win.fill(WHITE)
 
     elif winner == 2:
         # noirs gagnent -> fond noir, écriture blanche
-        titre = titre_blanc
-        texte = texte_blanc
+        titre = TITRE_COULEUR_BLANC
+        texte = TEXTE_VICTOIRE_NOIRS
         win.fill(TRUE_BLACK)
+
+    elif winner == 0:
+        # égalité -> fond gris, écriture blanche
+        titre = TITRE_COULEUR_BLANC
+        texte = TEXTE_EGALITE
+        win.fill(GREY)
 
     # on redimensionne le titre et le texte
     titre = pg.transform.scale(titre, (longueur_titre, hauteur_titre))

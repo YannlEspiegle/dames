@@ -1,7 +1,7 @@
 # Jeu de dames
 
 Ce jeu de dames a été créé pour le projet de programmation orientée
-objet de NSI. Elle respecte les règles contenue sur[cette page](http://www.ffjd.fr/Web/index.php?page=reglesdujeu).
+objet de NSI. Elle respecte les règles contenue sur [cette page](http://www.ffjd.fr/Web/index.php?page=reglesdujeu).
 Seul la règle n.11 n'a pas été implémentée car trop compliquée à coder.
 
 Tout les graphismes, que ce soit les pièces ou le message de fin ont été fait avec paint.

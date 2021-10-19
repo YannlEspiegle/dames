@@ -94,6 +94,18 @@ class Board:
             return self.plateau[y][x]
         return self.plateau[y][x] // 10
 
+    def liste_pieces(self):
+        blancs = []
+        noirs = []
+        for ligne in self.plateau:
+            for piece in ligne:
+                if piece:
+                    if piece in [1, 10]:
+                        blancs.append(piece)
+                    else:
+                        noirs.append(piece//2)
+        return blancs, noirs
+
     def piece_from(self, pos):
         """Renvoie un objet Piece correspondant à la pièce située sur `pos`"""
         x, y = pos

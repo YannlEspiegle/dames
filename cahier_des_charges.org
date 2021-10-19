@@ -13,11 +13,11 @@
 - [X] mouvement des dames
 - [X] prises des dames
 - [X] La rafle
-** [0/4] Fins de parties
-- [ ] Si 25 coups sans prises, partie nulle
-- [ ] Si dame contre dame, partie nulle
-- [ ] Abandon
-- [ ] Si un joueur n'a plus de pièces, il perd
+** [4/4] Fins de parties
+- [X] Si 25 coups sans prises, partie nulle
+- [X] Si dame contre dame, partie nulle
+- [X] Abandon
+- [X] Si un joueur n'a plus de pièces, il perd
 * Classe Board
 ** Codes pièces
 - 0 : case vide

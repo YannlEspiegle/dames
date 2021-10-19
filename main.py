@@ -33,6 +33,15 @@ def main():
                 position = pg.mouse.get_pos()
                 g.onclick(position)
 
+            if event.type == pg.KEYDOWN:
+                if pg.key.get_mods() & pg.KMOD_CTRL:
+                    if event.key == pg.K_a:
+                        # Ctrl+a -> abandon
+                        g.abandon()
+                    elif event.key == pg.K_e:
+                        # Ctrl+e -> égalité
+                        g.nulle()
+
         clock.tick(FPS)
 
 
