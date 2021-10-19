@@ -14,6 +14,7 @@ class Game:
         self.tours_sans_prises = 0
         self.partie_finie = False
         self.winner = 0
+        self.piece_rafle = None
 
     def draw(self):
         if not self.partie_finie:
@@ -34,12 +35,24 @@ class Game:
 
             if not self.board.piece_est_touchee:
                 if self.board.get_color(case) == self.trait:
-                    pieces_obligatoires = self.board.pieces_pouvant_prendre(self.trait)
+                    # Si une pièce est en train de rafler, on ne peut que jouer cette pièce là
+                    if self.piece_rafle:
+                        pieces_obligatoires = [self.piece_rafle]
+                    else:
+                        pieces_obligatoires = self.board.pieces_pouvant_prendre(self.trait)
+
                     if pieces_obligatoires == [] or case in pieces_obligatoires:
                         self.board.select(case)
             else:
-                # si une piece est déja selectionnée, on la déplace
-                est_legal = self.board.deplacer(case)
-                self.board.deselect()
-                if est_legal:
-                    self.tour_suivant()
+                # si une piece est déja sélectionnée, on la déplace
+                est_legal, prise = self.board.deplacer(case)
+
+                if prise and case in self.board.pieces_pouvant_prendre(self.trait):
+                    # si la pièce peut rafler (càd prendre une autre pièce après une prise)
+                    self.piece_rafle = case
+                else:
+                    self.piece_rafle = None
+
+                    self.board.deselect()
+                    if est_legal:
+                        self.tour_suivant()

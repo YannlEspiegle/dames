@@ -32,7 +32,9 @@ class Board:
         Déplace la `piece_touchee` au point d'arrivée
         Si le coup est légal : déplace la pièce et renvoie True
         Sinon : renvoie False
+        le deuxième élément renvoyé est vrai si une prise a été efféctuée, faux sinon
         """
+        prise = False
         if arrivee in self.piece_touchee.coups_possibles(self.plateau):
 
             if self.piece_touchee.prises_possibles(self.plateau) != []:
@@ -40,6 +42,7 @@ class Board:
                 for arr, piece_adverse in self.piece_touchee.prises_possibles(self.plateau):
                     if arr == arrivee:
                         self.enlever(piece_adverse)
+                prise = True
 
             self.piece_touchee.deplacer(self.plateau, arrivee)
 
@@ -49,8 +52,8 @@ class Board:
             elif self.piece_touchee.couleur == 2 and arrivee[1] == 9:
                 self.piece_touchee.promotion(self.plateau)
 
-            return True
-        return False
+            return True, prise
+        return False, prise
 
     def pieces_pouvant_prendre(self, couleur):
         """vérifie si une couleur peut faire une prise car elle doit prendre obligatoirement
