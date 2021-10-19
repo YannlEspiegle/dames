@@ -84,10 +84,14 @@ class Piece:
             while 0 <= x < 10 and 0 <= y < 10:
                 if plateau[y][x] != 0:
                     if plateau[y][x] in adverses:
-                        # on vérifie si la case d'après est vide et dans le plateau
-                        x_arr, y_arr = self.diagonale(self.x, self.y, direction, longueur + 1)
-                        if 0 <= x_arr < 10 and 0 <= y_arr < 10 and plateau[y_arr][x_arr] == 0:
+                        i = 1
+                        # x_arr, y_arr = cases d'arrivée
+                        x_arr, y_arr = self.diagonale(self.x, self.y, direction, longueur + i)
+                        while 0 <= x_arr < 10 and 0 <= y_arr < 10 and plateau[y_arr][x_arr] == 0:
                             res.append([(x_arr, y_arr), (x, y)]) # case d'arrivée puis case de l'adversaire
+                            i += 1
+                            x_arr, y_arr = self.diagonale(self.x, self.y, direction, longueur + i)
+
                     break
                 else:
                     longueur += 1
@@ -106,9 +110,9 @@ class Piece:
         self.y = y_arr
 
     def promotion(self, plateau):
-        self.est_dame = True
         if not self.est_dame:
             plateau[self.y][self.x] *= 10
+        self.est_dame = True
 
     def diagonale(self, x, y, direction, l):
         """renvoie la case de direction {0, 1, 2, 3} (la vrai direction n'importe pas) et de longueur l"""
