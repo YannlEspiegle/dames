@@ -4,10 +4,10 @@ Ce jeu de dames a été créé pour le projet de programmation orientée
 objet de NSI. Elle respecte les règles contenue sur [cette page](http://www.ffjd.fr/Web/index.php?page=reglesdujeu).
 Seul la règle n.11 n'a pas été implémentée car trop compliquée à coder.
 
-Tout les graphismes, que ce soit les pièces ou le message de fin ont été fait avec paint.
+Tout les graphismes, que ce soit les pièces ou le message de fin ont été réalisés avec paint.
 
 # Installation
-Pour installer les dépendances, il suffit d'executer la commande suivante
+Pour installer les dépendances, il suffit d'exécuter la commande suivante
 
 ``` sh
 pip install -r requirements.txt
@@ -19,8 +19,8 @@ python main.py
 ```
 
 # Contrôles
-- Pour déplacer une pièce, on sélectionne clique sur la pièce puis on clique sur la case d'arrivée (après une rafle, 
-  pièce est déjà sélectionnée)
+- Pour déplacer une pièce, on clique sur la pièce à sélectionner puis on clique sur la case d'arrivée (après une rafle, 
+  la pièce est déjà sélectionnée)
 - Pour abandonner, il faut appuyer sur _CTRL+A_
 - Si vous décidez de terminer la partie avec une égalité, appuyez sur _CTRL+E_
 
@@ -41,7 +41,7 @@ La classe `Board` gère les pièces en général notamment avec l'attribut `plat
 - Il vérifie la légalité des coups avec la méthode `deplacer()` tout en vérifiant la promotion de la pièce à déplacer.
   Cette méthode anticipe aussi la gestion de la rafle en renvoyant un deuxième booléen `prise`.
 - Il peut sélectionner une pièce pour ensuite la déplacer avec la méthode `select()` et la désélectionner avec `deselect()`
-- Il renvoie les pièces qui peuvent prendre avec `pieces_pouvant_prendre(couleur)`, ça sert à la classe Game car ont ne peut que jouer les pièces qui peuvent prendre.
+- Il renvoie les pièces qui peuvent prendre avec `pieces_pouvant_prendre(couleur)`, cette méthode sert à la classe Game car ont ne peut que jouer les pièces pouvant prendre.
 - La classe peut renvoyer diverses informations sur les pièces avec `get_color(pos)` et `piece_from(pos)`.
 
 ### Codes Pièces
