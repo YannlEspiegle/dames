@@ -35,22 +35,22 @@ class Board:
         le deuxième élément renvoyé est vrai si une prise a été efféctuée, faux sinon
         """
         prise = False
-        if arrivee in self.piece_touchee.coups_possibles(self.plateau):
+        if arrivee in self.piece_touchee.coups_possibles():
 
-            if self.piece_touchee.prises_possibles(self.plateau) != []:
+            if self.piece_touchee.prises_possibles() != []:
                 # prises_possibles renvoie la case d'arrivée puis la case de l'adversaire à supprimer
-                for arr, piece_adverse in self.piece_touchee.prises_possibles(self.plateau):
+                for arr, piece_adverse in self.piece_touchee.prises_possibles():
                     if arr == arrivee:
                         self.enlever(piece_adverse)
                 prise = True
 
-            self.piece_touchee.deplacer(self.plateau, arrivee)
+            self.piece_touchee.deplacer(arrivee)
 
             # promotions en dames
             if self.piece_touchee.couleur == 1 and arrivee[1] == 0:
-                self.piece_touchee.promotion(self.plateau)
+                self.piece_touchee.promotion()
             elif self.piece_touchee.couleur == 2 and arrivee[1] == 9:
-                self.piece_touchee.promotion(self.plateau)
+                self.piece_touchee.promotion()
 
             return True, prise
         return False, prise
@@ -63,7 +63,7 @@ class Board:
             for x in range(10):
                 if self.get_color((x, y)) == couleur:
                     piece = self.piece_from((x, y))
-                    if piece.prises_possibles(self.plateau) != []:
+                    if piece.prises_possibles() != []:
                         res.append((x, y))
         return res
 
@@ -111,7 +111,7 @@ class Board:
         x, y = pos
         couleur = self.get_color(pos)
         est_dame = (self.plateau[y][x] == couleur * 10)
-        return Piece(pos, couleur, est_dame)
+        return Piece(pos, couleur, self.plateau, est_dame)
 
     def draw(self):
         """dessine le plateau et les pièces sur l'écran"""

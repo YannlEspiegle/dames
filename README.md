@@ -6,6 +6,12 @@ Seul la règle n.11 n'a pas été implémentée car trop compliquée à coder.
 
 Tout les graphismes, que ce soit les pièces ou le message de fin ont été fait avec paint.
 
+# Contrôles
+- Pour déplacer une pièce, on sélectionne clique sur la pièce puis on clique sur la case d'arrivée (après une rafle, 
+  pièce est déjà sélectionnée)
+- Pour abandonner, il faut appuyer sur _CTRL+A_
+- Si vous décidez de terminer la partie avec une égalité, appuyez sur _CTRL+E_
+
 # Implémentation
 
 ## Classe Game
@@ -39,8 +45,8 @@ La classe `Board` gère les pièces en général notamment avec l'attribut `plat
 
 La classe `Piece` gère les actions qui se passent sur une pièce en particulier. 
 
-- La méthode `coups_possibles(plateau)` renvoie les coups possibles de la pièce, si elle peut prendre, elle renvoie les cases d'arrivée de ces prises
-- La méthode `prises_possibles(plateau)` renvoie la case d'arrivée de la prise puis la case de l'adversaire à supprimer
-- La méthode `deplacer(plateau, arrivee)` déplace la case sans se souvier de l'arrivée ou de la légalité du coup
-- La méthode `promotion(plateau)` transforme la pièce en dame
+- La méthode `coups_possibles()` renvoie les coups possibles de la pièce, si elle peut prendre, elle renvoie les cases d'arrivée de ces prises
+- La méthode `prises_possibles()` renvoie la case d'arrivée de la prise puis la case de l'adversaire à supprimer
+- La méthode `deplacer(arrivee)` déplace la case sans se souvier de l'arrivée ou de la légalité du coup
+- La méthode `promotion()` transforme la pièce en dame
 - La méthode `diagonale(x, y, direction, l)` renvoie la diagonale par rapport à `(x, y)` dans la direction `direction` et de longueur `l`.
