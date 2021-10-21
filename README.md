@@ -6,6 +6,18 @@ Seul la règle n.11 n'a pas été implémentée car trop compliquée à coder.
 
 Tout les graphismes, que ce soit les pièces ou le message de fin ont été fait avec paint.
 
+# Installation
+Pour installer les dépendances, il suffit d'executer la commande suivante
+
+``` sh
+pip install -r requirements.txt
+```
+Puis pour exéctuer le programme, il faut lancer la commande
+
+``` sh
+python main.py
+```
+
 # Contrôles
 - Pour déplacer une pièce, on sélectionne clique sur la pièce puis on clique sur la case d'arrivée (après une rafle, 
   pièce est déjà sélectionnée)
