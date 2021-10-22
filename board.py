@@ -3,8 +3,8 @@
 
 import pygame as pg
 
-from constants import BLACK, TAILLE_CASE, WHITE
-from pictures import PIECES
+from constants import BLACK, TAILLE_CASE, WHITE, PURPLE
+from pictures import PIECES, COUPS_POSSIBLES
 from piece import Piece
 
 
@@ -116,13 +116,22 @@ class Board:
     def draw(self):
         """dessine le plateau et les pièces sur l'écran"""
         taille = TAILLE_CASE
+
+        if self.piece_est_touchee:
+            coups_possibles = self.piece_touchee.coups_possibles()
+        else:
+            coups_possibles = []
+
+        # Dessiner le plateau
         for y in range(10):
             for x in range(10):
-                # Dessiner le plateau
-                if (x + y) % 2 == 0:
+                if self.piece_est_touchee and x == self.piece_touchee.x and y == self.piece_touchee.y:
+                    color_case = PURPLE
+                elif (x + y) % 2 == 0:
                     color_case = WHITE
                 else:
                     color_case = BLACK
+
                 case = (x * taille, y * taille, taille, taille)
                 pg.draw.rect(self.win, color_case, case)
 
@@ -131,3 +140,9 @@ class Board:
                     piece = PIECES[self.plateau[y][x]]  # `piece` est une image
                     piece = pg.transform.scale(piece, (taille, taille))
                     self.win.blit(piece, (x * taille, y * taille))
+
+                # Dessiner les coups possibles
+                if (x, y) in coups_possibles:
+                    cp = COUPS_POSSIBLES
+                    cp = pg.transform.scale(cp, (taille, taille))
+                    self.win.blit(cp, (x * taille, y * taille))

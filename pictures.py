@@ -9,6 +9,8 @@ PIECES = {
     20: pg.image.load("assets/dame_noire.png"),
 }
 
+COUPS_POSSIBLES = pg.image.load("assets/coups_possibles.png")
+
 TITRE_COULEUR_BLANC = pg.image.load("assets/titre.png")
 TITRE_COULEUR_NOIR = pg.image.load("assets/titre_noir.png")
 

@@ -10,10 +10,4 @@ WHITE = (230, 230, 230)
 GREY = (90, 90, 90)
 BLACK = (80, 80, 80)
 TRUE_BLACK = (30, 30, 30)
-
-COULEUR = {
-    1: "blanc",
-    10: "blanc",
-    2: "noir",
-    20: "noir",
-}
+PURPLE = (90, 74, 127)
