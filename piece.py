@@ -16,24 +16,27 @@ class Piece:
 
         # si une prise est possibles, il faut la faire obligatoirement
         prises = self.prises_possibles()
-        if prises != []:
+        if prises:
             return [prise[0] for prise in prises] # on renvoie seulement la case d'arrivée
 
         if self.est_dame:
             return self.coups_possibles_dame()
 
         if self.couleur == 1:
-            # les pièces blanches montent
-            res = [
+            cp = [
                 (self.x + 1, self.y - 1),
                 (self.x - 1, self.y - 1),
             ]
         elif self.couleur == 2:
-            # les pièces noires descendent
-            res = [
+            cp = [
                 (self.x + 1, self.y + 1),
                 (self.x - 1, self.y + 1),
             ]
+
+        res = []
+        for x, y in cp:
+            if 0 <= x < 10 and 0 <= y < 10 and self.plateau[y][x] == 0:
+                res.append((x, y))
         return res
 
     def coups_possibles_dame(self):
